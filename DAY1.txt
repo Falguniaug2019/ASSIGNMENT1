@@ -1,0 +1,383 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 5.5.61 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE ADVENTUREWORKS;
+ERROR 1007 (HY000): Can't create database 'adventureworks'; database exists
+mysql> DROP TABLE ADVENTUREWORKS;
+ERROR 1046 (3D000): No database selected
+mysql> CREATE DATABASE PROJECT;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW DATABASE PROJECT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE PROJECT' at line 1
+mysql> SHOW DATABASE PROJECT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE PROJECT' at line 1
+mysql> CREATE DATABASE GAYTRI;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE TABLE DRESSCODE
+    -> (
+    -> DRESSCODEID INT,
+    -> NAME VARCHAR(20)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> CREATE TABLE DRESSCODE
+    -> <
+    -> DRESSCODEID INT,
+    -> NAME VARCHAR(20)
+    -> >;
+ERROR 1046 (3D000): No database selected
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| d22                |
+| dbda               |
+| firstproject       |
+| gaytri             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| project            |
+| sales              |
+| tarun              |
+| test               |
+| vita               |
+| vita_db            |
++--------------------+
+15 rows in set (0.14 sec)
+
+mysql> USE ADVENTUREWORKS;
+Database changed
+mysql> CREATE TABLE PRODUCT_CATEGORY
+    -> (PRODUCTID INT,PRODUCTNAME VARCHAR(30))
+    -> ;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> SHOW TABLES
+    -> ;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| product_category         |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW TABLE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> INSERT INTO TABLE PRODUCTCATEGORY VALUES(1,'PATIYALA');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE PRODUCTCATEGORY VALUES(1,'PATIYALA')' at line 1
+mysql> INSERT INTO PRODUCTCATEGORY VALUES(1,'PATIYALA');
+ERROR 1146 (42S02): Table 'adventureworks.productcategory' doesn't exist
+mysql> INSERT INTO PRODUCT_CATEGORY VALUES(1,'PATIYALA');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> INSERT INTO PRODUCT_CATEGORY VALUES(2,'KURTI'),(3,'JEANS'),(4,'TOP');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT *
+    -> FROM PRODUCT_CATEGORY;
++-----------+-------------+
+| PRODUCTID | PRODUCTNAME |
++-----------+-------------+
+|         1 | PATIYALA    |
+|         2 | KURTI       |
+|         3 | JEANS       |
+|         4 | TOP         |
++-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT PRODUCTNAME FROM PRODUCT_CATEGORY;
++-------------+
+| PRODUCTNAME |
++-------------+
+| PATIYALA    |
+| KURTI       |
+| JEANS       |
+| TOP         |
++-------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT PRODUCTNAME FROM PRODUCT_CATEGORY LIMIT 1;
++-------------+
+| PRODUCTNAME |
++-------------+
+| PATIYALA    |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE EMP
+    -> (EMPID INT,ENAME VARCHAR(20),DEPT VARCHAR(20),SALARY INT);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| emp                      |
+| product_category         |
++--------------------------+
+2 rows in set (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| d22                |
+| dbda               |
+| firstproject       |
+| gaytri             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| project            |
+| sales              |
+| tarun              |
+| test               |
+| vita               |
+| vita_db            |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> USE GAYTRI;
+Database changed
+mysql> SHOW TABLES;
+Empty set (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| d22                |
+| dbda               |
+| firstproject       |
+| gaytri             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| project            |
+| sales              |
+| tarun              |
+| test               |
+| vita               |
+| vita_db            |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> USE ADVENTUREWORKS;
+Database changed
+mysql> SHOEW TABLES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SHOEW TABLES' at line 1
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| emp                      |
+| product_category         |
++--------------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMP;
+Empty set (0.00 sec)
+
+mysql> DESCRIBE EMP;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| EMPID  | int(11)     | YES  |     | NULL    |       |
+| ENAME  | varchar(20) | YES  |     | NULL    |       |
+| DEPT   | varchar(20) | YES  |     | NULL    |       |
+| SALARY | int(11)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> INSERT INTO EMP VALUES(1,'GAYU','IT',100000),(2,'FAL','HR',50000),(3,'ANJU','MEC',30000),(4,'DIVA','ELE',60000);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM EMP;
++-------+-------+------+--------+
+| EMPID | ENAME | DEPT | SALARY |
++-------+-------+------+--------+
+|     1 | GAYU  | IT   | 100000 |
+|     2 | FAL   | HR   |  50000 |
+|     3 | ANJU  | MEC  |  30000 |
+|     4 | DIVA  | ELE  |  60000 |
++-------+-------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT DEPT,ENAME,SALARY,EMPID;
+ERROR 1054 (42S22): Unknown column 'DEPT' in 'field list'
+mysql> SELECT DEPT,ENAME,SALARY,EMPID FROM EMP;
++------+-------+--------+-------+
+| DEPT | ENAME | SALARY | EMPID |
++------+-------+--------+-------+
+| IT   | GAYU  | 100000 |     1 |
+| HR   | FAL   |  50000 |     2 |
+| MEC  | ANJU  |  30000 |     3 |
+| ELE  | DIVA  |  60000 |     4 |
++------+-------+--------+-------+
+4 rows in set (0.00 sec)mysql> UPDATE EMP SET ENAME='GAYATRI' WHERE ENAME='GAYU';
+Query OK, 1 row affected (0.28 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM EMP;
++-------+---------+------+--------+
+| EMPID | ENAME   | DEPT | SALARY |
++-------+---------+------+--------+
+|     1 | GAYATRI | IT   | 100000 |
+|     2 | FAL     | HR   |  50000 |
+|     3 | ANJU    | MEC  |  30000 |
+|     4 | DIVA    | ELE  |  60000 |
++-------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE EMP SET SALARY=20000 WHERE EMPID=4;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM EMP;
++-------+---------+------+--------+
+| EMPID | ENAME   | DEPT | SALARY |
++-------+---------+------+--------+
+|     1 | GAYATRI | IT   | 100000 |
+|     2 | FAL     | HR   |  50000 |
+|     3 | ANJU    | MEC  |  30000 |
+|     4 | DIVA    | ELE  |  20000 |
++-------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE DEPT
+    -> (DEPTID INT PRIMARY KEY,DENAME);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+mysql> (DEPTID INT PRIMARY KEY,DENAME VARCHAR(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DEPTID INT PRIMARY KEY,DENAME VARCHAR(20))' at line 1
+mysql> CREATE TABLE DEPT
+    -> (DEPTID INT PRIMARY KEY,DENAME VARCHAR(20));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> DESCRIBE DEPT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| DEPTID | int(11)     | NO   | PRI | NULL    |       |
+| DENAME | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> INSERT INTO DEPT VALUES(1,'IT');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO DEPT VALUES(2,'IT'),(2,'MECH');
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+mysql> INSERT INTO DEPT VALUES(2,'IT'),(3,'MECH');
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| d22                |
+| dbda               |
+| firstproject       |
+| gaytri             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| project            |
+| sales              |
+| tarun              |
+| test               |
+| vita               |
+| vita_db            |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| dept                     |
+| emp                      |
+| product_category         |
++--------------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPT;
++--------+--------+
+| DEPTID | DENAME |
++--------+--------+
+|      1 | IT     |
+|      2 | IT     |
+|      3 | MECH   |
++--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> DELETE FROM DEPT WHERE DEPTID=2;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM DEPT;
++--------+--------+
+| DEPTID | DENAME |
++--------+--------+
+|      1 | IT     |
+|      3 | MECH   |
++--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> DROP DEPT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DEPT' at line 1
+mysql> DROP TABLE DEPT;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| emp                      |
+| product_category         |
++--------------------------+
+2 rows in set (0.00 sec)
+
+mysql>  SHOW DATABASES
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| d22                |
+| dbda               |
+| firstproject       |
+| gaytri             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| project            |
+| sales              |
+| tarun              |
+| test               |
+| vita               |
+| vita_db            |
++--------------------+
+15 rows in set (0.00 sec)

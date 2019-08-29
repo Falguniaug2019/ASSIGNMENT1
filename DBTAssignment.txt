@@ -1,0 +1,286 @@
+create table orders
+( onum int, 
+amt float,
+odate char(20),
+cnum int references customer(cnum),
+snum int references salespeople(snum)
+);
+
+
+insert into salespeople values
+(1001,'peel','london',0.12),
+(1002,'serres','san jose',0.13),
+(1004,'motika','london',0.11),
+(1007,'rifkin','barcelona',0.15),
+(1003,'axel','new york',0.10),
+(1005,'fran','london',0.26);
+
+
+insert into customer values
+(2001,'huffman','london',100,1001),
+(2002,'giovani','rome',200,1003),
+(2003,'liu','san jose',200,1002),
+(2004,'grass','berlin',300,1002),
+(2006,'clemens','london',100,1001),
+(2008,'cisneros','san jose',300,1007),
+(2007,'pereira','rome',100,1004);
+
+
+insert into orders values
+(3001,18.69,'10/03/96',2008,1007),
+(3003,767.19,'10/03/96',2001,1001),
+(3002,1900.10,'10/03/96',2007,1004),
+(3005,5160.45,'10/03/96',2003,1002),
+(3006,1098.16,'10/03/96',2008,1007),
+(3009,1713.13,'10/04/96',2002,1003),
+(3007,75.75,'10/04/96',2002,1003),
+(3008,4723.00,'10/05/96',2006,1001),
+(3010,1309.95,'10/06/96',2004,1002),
+(3011,9891.88,'10/06/96',2006,1001);
+----
+
+
+
+
+
+
+1----list columns of salespeople
+describe salespeople;
+
+2----- list all customers whose rating =100
+select *
+from customer
+where rating=100;
+
+
+3---- customer whose city is null
+select *
+from customer
+where city is null;
+
+
+
+4--- largest order by each salesperson on each day
+
+
+
+
+
+
+
+
+5--- arange order by customer des order
+select *
+from customer
+order by cnum desc;
+
+6--- salespeople currently have orders in the current order table
+
+
+select sname,onum
+from salespeople s inner join orders o
+on s.snum=o.snum
+group by(o.snum);
+
+
+
+
+select sname, count(*)
+from salespeople s inner join orders o
+on s.snum=o.snum
+group by (o.snum);
+
+
+
+
+7--- list customers matched with salespople serving them
+select cname,sname
+from customer inner join salespeople
+on customer.snum=salespeople.snum;
+
+
+
+select cnum,cname,sname
+from customer inner join salespeople
+on customer.snum=salespeople.snum;
+
+
+select dalla.sname,grahak.cname
+from salespeople as dalla  inner join customer as grahak
+on dalla.snum=grahak.snum;
+
+
+8---find the number and names of salespeople who had more than one customer.
+
+
+select sname,count(*),snum
+from salespeople s inner join customer c
+on s.snum=c.snum
+group by (c.snum)
+having count(c.snum) > 1;
+
+
+ for repetitive order greater than 2
+select sname,count(*)
+from orders o inner join salespeople s
+on o.snum=s.snum
+group by(o.snum)
+having count(o.snum)>=2;
+
+
+
+
+
+
+9-- count the order of each salespeople and output in descending order
+
+select sname,count(*)
+from orders o inner join salespeople s
+on o.snum=s.snum
+group by(o.snum)
+order by count(o.snum) desc;
+
+
+
+
+
+
+10---customer table if and only if one or more of the customer are located in san jose..
+
+
+select *
+from customer
+where city='san jose';
+
+
+
+11---matched salespeople to customer according to what city they lived
+
+
+select sname,cname,c.city
+from salespeople s inner join customer c
+on s.city=c.city;
+
+
+
+
+12---largest order of each salespeople
+
+
+select sname,count(*)
+from orders o inner join salespeople s
+on o.snum=s.snum
+group by(o.snum);
+
+
+
+13---customer in san jose who have rating above 200
+
+select *
+from customer
+where city='san jose' AND rating>200;
+
+
+
+14---name and commissions of salespeople in london
+
+select sname, comm
+from salespeople 
+where city='london';
+
+
+15---list all order of salespeople motika  from order table
+
+
+select *
+from orders o inner join salespeople s 
+on s.snum=o.snum
+where s.sname = 'motika';
+
+
+
+
+select *
+from orders o inner join salespeople s 
+on s.snum=o.snum
+where s.snum = (select snum
+		from salespeople
+		where sname='motika');
+
+     
+
+16---all customers with orders on octomber 3
+
+select *
+from orders o inner join customer c
+on c.snum=o.snum
+where odate='10/03/96';
+
+
+
+
+
+select *
+from orders o inner join customer c
+on c.snum=o.snum
+where odate='03/10/96';
+
+
+
+
+
+
+17---give the sum of amount of all orders table , grouped by date ,eliminating  all those dates where the sum was not at least is 2000.00 above the max amount 
+
+select * 
+from orders
+  group by(odate)
+having sum(amt)>(2000+max(amt));
+
+
+
+
+18--- select order that had amount that were greater than at least one of the order from octomber 6
+
+
+select *
+ from orders
+where (amt >(select min(amt)
+		from orders
+		where odate='10/06/96') and 
+		not odate='10/06/96'); 
+
+19--- write the querry that EXISTS operator to extract all salespeople  who have customers with a rating of 300
+
+
+
+
+
+
+
+
+
+
+
+
+
+20---all pairs of customer having same rating
+
+
+select cname,rating
+from customer
+order by rating;
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
